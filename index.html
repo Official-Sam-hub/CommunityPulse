@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CommunityPulse — AAUA Students & Host Community</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-logo">CP</div>
+        <div class="brand-text">
+          <strong>CommunityPulse</strong>
+          <span>AAUA · Host Community Issues</span>
+        </div>
+      </div>
+      <div class="topbar-right" id="sessionInfo"></div>
+    </header>
+
+    <main id="app">
+      <section id="view-landing" class="view active">
+        <div class="hero-block">
+          <p class="eyebrow">Report · Track · Resolve</p>
+          <h1>Who is using CommunityPulse today?</h1>
+          <p class="lede">Choose your role. Each role opens a different set of tools designed for students, host-community indigenes, and administrators.</p>
+        </div>
+        <div class="role-grid">
+          <button class="role-card" data-role="student">
+            <span class="role-num">01</span>
+            <h2>Student</h2>
+            <p>Register or log in, submit issues, and track the status of your own reports.</p>
+            <span class="role-cta">Continue as Student →</span>
+          </button>
+          <button class="role-card" data-role="indigene">
+            <span class="role-num">02</span>
+            <h2>Indigene</h2>
+            <p>View all issues reported in the Akungba and surrounding host communities.</p>
+            <span class="role-cta">View Community Issues →</span>
+          </button>
+          <button class="role-card" data-role="admin">
+            <span class="role-num">03</span>
+            <h2>Administrator</h2>
+            <p>Review every report, update status, and remove closed items.</p>
+            <span class="role-cta">Admin Login →</span>
+          </button>
+        </div>
+      </section>
+
+      <section id="view-student-register" class="view">
+        <button class="back-btn" data-back="landing">← Back to roles</button>
+        <h1>Student Registration</h1>
+        <p class="lede">Create an account to start reporting issues affecting AAUA students and the host community.</p>
+        <form id="form-register" class="panel">
+          <label>Full name
+            <input type="text" id="reg-name" required placeholder="e.g. Ogunaja Samson Ayomide">
+          </label>
+          <label>Email
+            <input type="email" id="reg-email" required placeholder="you@aaua.edu.ng">
+          </label>
+          <label>Password
+            <input type="password" id="reg-password" required minlength="4" placeholder="Minimum 4 characters">
+          </label>
+          <button type="submit" class="btn-primary">Create Account</button>
+          <p class="switch-line">Already have an account? <a href="#" data-goto="student-login">Log in</a></p>
+        </form>
+      </section>
+
+      <section id="view-student-login" class="view">
+        <button class="back-btn" data-back="landing">← Back to roles</button>
+        <h1>Student Login</h1>
+        <p class="lede">Sign in to report issues and track their progress.</p>
+        <form id="form-student-login" class="panel">
+          <label>Email
+            <input type="email" id="login-email" required placeholder="you@aaua.edu.ng">
+          </label>
+          <label>Password
+            <input type="password" id="login-password" required>
+          </label>
+          <button type="submit" class="btn-primary">Log In</button>
+          <p class="switch-line">No account yet? <a href="#" data-goto="student-register">Register here</a></p>
+          <p class="hint">Demo note: Data lives only in this browser session. Register first if you have not done so.</p>
+        </form>
+      </section>
+
+      <section id="view-student-dashboard" class="view">
+        <button class="back-btn" data-back="landing">← Log out</button>
+        <h1>Welcome, <span id="student-name-tag"></span></h1>
+        <p class="lede">Submit a new issue or track the ones you have already reported.</p>
+        <div class="dash-grid">
+          <div class="panel">
+            <h2>Report an Issue</h2>
+            <form id="form-report">
+              <label>Title
+                <input type="text" id="rpt-title" required placeholder="e.g. Poor lighting near Ibaka junction">
+              </label>
+              <label>Root-cause category
+                <select id="rpt-category" required>
+                  <option value="">Select category…</option>
+                  <option value="Methods">Methods — process & reporting channels</option>
+                  <option value="People">People — awareness & participation</option>
+                  <option value="Technology">Technology — access & digital tools</option>
+                  <option value="Environment">Environment — roads, power, safety, housing</option>
+                </select>
+              </label>
+              <label>Description
+                <textarea id="rpt-desc" rows="4" required placeholder="Describe the issue clearly and factually…"></textarea>
+              </label>
+              <button type="submit" class="btn-primary">Submit Report</button>
+            </form>
+          </div>
+          <div class="panel">
+            <h2>Your Reports</h2>
+            <div id="student-report-list" class="report-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-indigene-track" class="view">
+        <button class="back-btn" data-back="landing">← Back to roles</button>
+        <h1>Community Issue Tracker</h1>
+        <p class="lede">All issues reported by students and residents in Akungba and neighbouring host communities, with current status.</p>
+        <div id="indigene-report-list" class="report-list wide"></div>
+      </section>
+
+      <section id="view-admin-login" class="view">
+        <button class="back-btn" data-back="landing">← Back to roles</button>
+        <h1>Administrator Login</h1>
+        <p class="lede">Access the management dashboard to review and update reports.</p>
+        <form id="form-admin-login" class="panel">
+          <label>Username
+            <input type="text" id="admin-user" required placeholder="admin">
+          </label>
+          <label>Password
+            <input type="password" id="admin-pass" required placeholder="admin">
+          </label>
+          <button type="submit" class="btn-primary">Log In</button>
+          <p class="hint">Demo credentials: <strong>admin</strong> / <strong>admin</strong></p>
+        </form>
+      </section>
+
+      <section id="view-admin-dashboard" class="view">
+        <button class="back-btn" data-back="landing">← Log out</button>
+        <h1>Administrator Dashboard</h1>
+        <p class="lede">Overview of every report. Update status or remove closed items.</p>
+        <div class="admin-stats" id="admin-stats"></div>
+        <div class="panel wide">
+          <h2>All Reports</h2>
+          <div id="admin-report-list" class="report-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p><strong>CommunityPulse</strong> — lightweight prototype for AAUA students & host-community indigenes</p>
+      <p class="foot-meta">Developed by Ogunaja Samson Ayomide · Matric No: 220404117 · CSC 426</p>
+      <p class="foot-note">No data leaves this browser tab. Session resets on page reload.</p>
+    </footer>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
